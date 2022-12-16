@@ -8,7 +8,7 @@ function renderCategoryItem(itemData) { // declared outside component because it
   )
 }
 
-//Flatlist makes it scrollable, flatlist isn't neccessary here due to the fact that the list is a fixed size, scrollable could work as well.
+//Flatlist makes it scrollable, flatlist isn't neccessary here due to the fact that the list is a fixed size, scrollview could work as well.
 function categoriesScreen() {
   return (
     <FlatList data={CATEGORIES}
