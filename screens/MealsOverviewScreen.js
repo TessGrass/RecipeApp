@@ -1,10 +1,26 @@
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, FlatList } from 'react-native'
 import { MEALS } from '../data/dummy-data'
+import MealItem from '../components/MealItem'
 
-function MealsOverViewScreen() {
+function MealsOverViewScreen({ route }) { // route comes from mealsoverview being registered as a screen in app.js
+  const categoryId = route.params.categoryId // params - an optional object containing params which is defined while navigating. In this case it's itemData.item.id.
+  
+  const displayMeals = MEALS.filter((mealItem) => {
+    return mealItem.categoryIds.indexOf(categoryId)
+  })
+
+  function renderMealItem(itemData) {
+    return (
+     <MealItem title={itemData.item.title} />
+    )
+  }
+
   return (
   <View style={styles.container}>
-    <Text>Meals Overview Screen</Text>
+    <FlatList data={displayMeals}
+    keyExtractor={(item) => item.id}
+    renderItem={renderMealItem} // Is called for each item in Categories
+    /> 
   </View>
   )
 }

@@ -7,7 +7,9 @@ import { CATEGORIES } from '../data/dummy-data';
 function categoriesScreen({ navigation }) { // navigation is provided through the stack.screen in App.js. By bind the CategoriesScreen to a screen(stack.screen) the prop navigation is available.
   function renderCategoryItem(itemData) { 
     function pressHandler() {
-      navigation.navigate('MealsOverView') //Define to which screen we want to navigate
+      navigation.navigate('MealsOverView', { //Define to which screen we want to navigate. The object allows you to define the params passed to MealsOverview Screen.
+        categoryId:itemData.item.id,
+      })
     }
   
     return (
@@ -17,9 +19,7 @@ function categoriesScreen({ navigation }) { // navigation is provided through th
         onPress={pressHandler} 
       />
     )
-  }
-  
-  
+  }  
   
   return (
     <FlatList data={CATEGORIES}
