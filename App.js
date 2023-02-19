@@ -6,6 +6,7 @@ import CategoriesScreen from './screens/CategoriesScreen'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import MealsOverViewScreen from './screens/MealsOverviewScreen'
+import MealsDetailsScreen from './screens/MealsDetailsScreen'
 
 const Stack = createNativeStackNavigator() 
 // Stack is an object with two properties where every properties holds an object that acts like a component.
@@ -42,14 +43,11 @@ export default function App() {
           <Stack.Screen 
             name="MealsOverView" 
             component={MealsOverViewScreen}
-            options={({ route, navigation }) => { // Setting navigation options dynamic. Route and Navigation properties is given by React Navigation automatically. The function will fire every time the scrren becomes active.
-              const catId = route.params.categoryId
-              return {
-                title: catId
-              }            
-            }}
-          
-              />
+          />
+          <Stack.Screen
+            name="MealsDetails"
+            component={MealsDetailsScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
