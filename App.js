@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style='dark'/>
+      <StatusBar style='light'/>
       <NavigationContainer>
         <Stack.Navigator 
           screenOptions={{
@@ -41,8 +41,15 @@ export default function App() {
           />
           <Stack.Screen 
             name="MealsOverView" 
-            component={MealsOverViewScreen} 
-          />
+            component={MealsOverViewScreen}
+            options={({ route, navigation }) => { // Setting navigation options dynamic. Route and Navigation properties is given by React Navigation automatically. The function will fire every time the scrren becomes active.
+              const catId = route.params.categoryId
+              return {
+                title: catId
+              }            
+            }}
+          
+              />
         </Stack.Navigator>
       </NavigationContainer>
     </>
