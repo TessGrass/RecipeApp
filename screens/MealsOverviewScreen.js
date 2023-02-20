@@ -11,7 +11,7 @@ function MealsOverViewScreen({ route, navigation }) { // route comes from mealso
     return mealItem.categoryIds.indexOf(categoryId) >= 0 // returns true if categoryId matches MEALS.categoryIds, if the index doesnt match it will return -1.
   })
 
-  useLayoutEffect(() => { //setOptions creates a sideffect and we use useLayoutEffect to handle that. We can also use useEffect but useLayoutEffect allows us to make change to the screen before it updates, in this case making the dynamic title be loaded instantly.
+  useLayoutEffect(() => { //setOptions creates a sideffect and we use useLayoutEffect to handle that. We can also use useEffect but useLayoutEffect allows us to make change to the screen before it updates, in this case making the dynamic title load instantly.
     const categoryTitle = CATEGORIES.find((category) => category.id === categoryId).title
   
     navigation.setOptions({

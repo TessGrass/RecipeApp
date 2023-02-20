@@ -1,13 +1,32 @@
+import { useLayoutEffect } from 'react'
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import IconButton from '../components/IconButton'
 import MealDetails from '../components/mealDetails'
 import List from '../components/MealsDetails/List'
 import Subtitle from '../components/MealsDetails/Subtitle'
 import { MEALS } from '../data/dummy-data'
 
-function MealsDetailsScreen({ route }) {
+function MealsDetailsScreen({ route, navigation }) {
   const mealId = route.params.mealId
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId)
+
+  function headerButtonHandler() {
+    console.log('press');
+  }
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <IconButton 
+            icon='star'
+            color='white' 
+            press={headerButtonHandler} 
+          />
+        )
+      }
+    })
+  }, [navigation, headerButtonHandler])
   
   // When using an url based image, we need to set a width and height or else the image will not be visible.
   return (
