@@ -1,5 +1,7 @@
-import { View, Text, Image, StyleSheet, FlatList } from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
 import MealDetails from '../components/mealDetails'
+import List from '../components/MealsDetails/List'
+import Subtitle from '../components/MealsDetails/Subtitle'
 import { MEALS } from '../data/dummy-data'
 
 function MealsDetailsScreen({ route }) {
@@ -9,7 +11,7 @@ function MealsDetailsScreen({ route }) {
   
   // When using an url based image, we need to set a width and height or else the image will not be visible.
   return (
-   <View>
+   <ScrollView style={styles.rootContainer}>
     <Image style={styles.image} source={{uri: selectedMeal.imageUrl}} /> 
     <Text style={styles.title}>{selectedMeal.title}</Text>
     <MealDetails
@@ -18,25 +20,26 @@ function MealsDetailsScreen({ route }) {
       affordability={selectedMeal.affordability}
       textStyle={styles.detailText}
     />
-    <View style={styles.subtitleContainer}>
-      <Text style={styles.subtitle}>Ingredients</Text>
+
+    <View style={styles.listOuterContainer}>
+      <View style={styles.listContainer}>
+      <Subtitle>Ingredients</Subtitle>
+        <List data={selectedMeal.ingredients}></List>
+        <Subtitle>Steps</Subtitle>
+        <List data={selectedMeal.steps}></List>
+      </View>
     </View>
-      {selectedMeal.ingredients.map((ingredient) => (
-      <Text key={ingredient}>{ingredient}</Text>
-    ))}
-    <View style={styles.subtitleContainer}>
-      <Text style={styles.subtitle}>Steps</Text>
-    </View>
-      {selectedMeal.steps.map((step) => (
-      <Text key={step}>{step}</Text>
-    ))}
-   </View>
+
+   </ScrollView>
   )
 }
 
 export default MealsDetailsScreen
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    marginBottom: 32,
+  },
   image: {
     width: '100%',
     height: 350
@@ -51,18 +54,13 @@ const styles = StyleSheet.create({
   detailText: {
     color: 'white'
   },
-  subtitle: {
-    color: '#c9ab99',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+  listOuterContainer: {
+  alignItems: 'center'
   },
-  subtitleContainer: {
-    margin: 6,
-    paddingBottom: 6,
-    marginHorizontal: 60,
-    marginVertical: 4,
-    borderBottomColor: '#c9ab99',
-    borderBottomWidth: 2,
+
+  listContainer: {
+    width: '80%',
   },
+
+
 })
