@@ -1,4 +1,4 @@
-
+import 'react-native-gesture-handler';
 import { StatusBar, StyleSheet } from 'react-native'
 import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'

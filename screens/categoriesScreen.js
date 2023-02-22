@@ -4,7 +4,7 @@ import { CATEGORIES } from '../data/dummy-data';
 
 
 //Flatlist makes it scrollable, flatlist isn't neccessary here due to the fact that the list is a fixed size, scrollview could work as well.
-function categoriesScreen({ navigation }) { // navigation is provided through the stack.screen in App.js. By bind the CategoriesScreen to a screen(stack.screen) the prop navigation is available.
+function CategoriesScreen({ navigation }) { // navigation is provided through the stack.screen in App.js. By bind the CategoriesScreen to a screen(stack.screen) the prop navigation is available.
   function renderCategoryItem(itemData) { 
     function pressHandler() {
       navigation.navigate('MealsOverView', { //Define to which screen we want to navigate. The object allows you to define the params passed to MealsOverview Screen.
@@ -31,4 +31,4 @@ function categoriesScreen({ navigation }) { // navigation is provided through th
 
 }
 
-export default categoriesScreen
+export default CategoriesScreen
