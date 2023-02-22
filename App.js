@@ -5,12 +5,20 @@ import { useFonts } from 'expo-font'
 import CategoriesScreen from './screens/CategoriesScreen'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createDrawerNavigator } from '@react-navigation/drawer'
 import MealsOverViewScreen from './screens/MealsOverviewScreen'
 import MealsDetailsScreen from './screens/MealsDetailsScreen'
 
 const Stack = createNativeStackNavigator() 
 // Stack is an object with two properties where every properties holds an object that acts like a component.
 // Stack.Screen allows us to register a screen that will be manage by the Stack.Navigator.
+const Drawer = createDrawerNavigator();
+
+function DrawerNavigator() {
+  return <Drawer.Navigator>
+    <Drawer.Screen name="Categories" component={CategoriesScreen} />
+  </Drawer.Navigator>
+}
 
 export default function App() {
 
@@ -35,9 +43,9 @@ export default function App() {
             }}>
           <Stack.Screen 
             name="MealsCategories" 
-            component={CategoriesScreen} 
+            component={DrawerNavigator} 
             options={{
-              title: 'All Categories',
+              // title: 'All Categories',
             }}
           />
           <Stack.Screen 
