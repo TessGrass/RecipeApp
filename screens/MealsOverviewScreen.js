@@ -4,7 +4,8 @@ import { View, StyleSheet, FlatList } from 'react-native'
 import { MEALS, CATEGORIES } from '../data/dummy-data'
 import MealItem from '../components/MealItem'
 
-function MealsOverViewScreen({ route, navigation }) { // route comes from mealsoverview being registered as a screen in app.js
+function MealsOverViewScreen({ route, navigation }) { // route con comes from mealsoverview being registered as a screen in app.js
+  console.log(route)
   const categoryId = route.params.categoryId // params - an optional object containing params which is defined while navigating. In this case it's itemData.item.id.
 
   const displayMeals = MEALS.filter((mealItem) => {

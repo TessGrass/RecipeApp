@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import MealsOverViewScreen from './screens/MealsOverviewScreen'
 import MealsDetailsScreen from './screens/MealsDetailsScreen'
+import FavoriteScreen from './screens/FavoriteScreen';
 
 const Stack = createNativeStackNavigator() 
 // Stack is an object with two properties where every properties holds an object that acts like a component.
@@ -15,8 +16,16 @@ const Stack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
-  return <Drawer.Navigator>
+  return <Drawer.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: '#351401' },
+      headerTintColor: 'white',
+      headerTitleAlign: 'center',
+      title: "All Categories",
+      sceneContainerStyle: {backgroundColor: '#3f2f25'}, // To set background color when using drawer, sceneContainerStyle must be used.
+    }}>
     <Drawer.Screen name="Categories" component={CategoriesScreen} />
+    <Drawer.Screen name="Favorites" component={FavoriteScreen} />
   </Drawer.Navigator>
 }
 
@@ -39,13 +48,14 @@ export default function App() {
           screenOptions={{
             headerStyle: { backgroundColor: '#351401' },
             headerTintColor: 'white',
+            headerTitleAlign: 'center',
             contentStyle: {backgroundColor: '#3f2f25'},
             }}>
           <Stack.Screen 
-            name="MealsCategories" 
+            name="Drawer" 
             component={DrawerNavigator} 
             options={{
-              // title: 'All Categories',
+              headerShown: false
             }}
           />
           <Stack.Screen 
@@ -55,6 +65,9 @@ export default function App() {
           <Stack.Screen
             name="MealsDetails"
             component={MealsDetailsScreen}
+            options={{
+              title: "About the Meal"
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
