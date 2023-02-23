@@ -5,33 +5,36 @@ import MealDetails from '../components/mealDetails'
 import List from '../components/MealsDetails/List'
 import Subtitle from '../components/MealsDetails/Subtitle'
 import { MEALS } from '../data/dummy-data'
-import { FavoritesContext } from '../store/context/favorites-context'
+import { FavoritesContext } from '../store/context/favorites-context.js'
 
 function MealsDetailsScreen({ route, navigation }) {
   const favoriteMealCtx = useContext(FavoritesContext) // FavoriteContext points to the variable with the same name in favorite-context.js
-  
   const mealId = route.params.mealId
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId)
 
   const mealIsFavorite = favoriteMealCtx.ids.includes(mealId) // returns true if the mealId is found in the favoriteMeal array
 
-  function headerButtonHandler() {
-    console.log('press')
+  function changeFavoriteStatusHandler() {
+    if (mealIsFavorite) {
+        favoriteMealCtx.removeFavorite(mealId)
+    } else {
+      favoriteMealCtx.addFavorite(mealId)
+    }
   }
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
         return (
           <IconButton 
-            icon='star'
+            icon={mealIsFavorite ? 'star' : 'star-outline'}
             color='white' 
-            press={headerButtonHandler} 
+            press={changeFavoriteStatusHandler} 
           />
         )
       }
     })
-  }, [navigation, headerButtonHandler])
+  }, [navigation, changeFavoriteStatusHandler])
   
   // When using an url based image, we need to set a width and height or else the image will not be visible.
   return (

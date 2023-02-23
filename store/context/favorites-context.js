@@ -1,15 +1,15 @@
 import { createContext, useState } from 'react'
 
 
-const FavoritesContext = createContext({
+export const FavoritesContext = createContext({
   ids: [],
   addFavorite: (id) => {},
-  remoteFavorite: () => {}
+  removeFavorite: () => {},
 })
 
 function FavoritesContextProvider({ children }) {
 
-  const [favoritMealIds, setFavoriteMealIds] = useState([])
+  const [favoriteMealIds, setFavoriteMealIds] = useState([])
 
   function addFavorite(id) {
     setFavoriteMealIds((currentFavIds) => [...currentFavIds, id]) //currentFavIds -> prev state snapschot.
@@ -20,10 +20,11 @@ function FavoritesContextProvider({ children }) {
     currentFavIds.filter(mealId => mealId !== id)) // filter out the id
   }
 
+  
   const value = {
-    ids: favoritMealIds,
+    ids: favoriteMealIds,
     addFavorite: addFavorite, // points to the function with the same name
-    removeFavorite: removeFavorite // points to the function with the same name
+    removeFavorite: removeFavorite, // points to the function with the same name
   }
 
   return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>
@@ -31,4 +32,3 @@ function FavoritesContextProvider({ children }) {
 
 
 export default FavoritesContextProvider
-
