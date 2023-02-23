@@ -10,6 +10,7 @@ import MealsOverViewScreen from './screens/MealsOverviewScreen'
 import MealsDetailsScreen from './screens/MealsDetailsScreen'
 import FavoriteScreen from './screens/FavoriteScreen'
 import { Ionicons } from '@expo/vector-icons'
+import FavoritesContextProvider from './store/context/favorites-context';
 
 // Stack is an object with two properties where every properties holds an object that acts like a component.
 // Stack.Screen allows us to register a screen that will be manage by the Stack.Navigator.
@@ -31,7 +32,7 @@ function DrawerNavigator() {
     }}>
     <Drawer.Screen 
       name="Categories"
-      component={CategoriesScreen}
+      component={CategoriesScreen} // starting page
       options={{
         title: 'All Categories',
         drawerIcon: ({color, size}) => (
@@ -65,6 +66,7 @@ export default function App() {
   return (
     <>
       <StatusBar style='light'/>
+      <FavoritesContextProvider>
       <NavigationContainer>
         <Stack.Navigator 
           screenOptions={{
@@ -93,6 +95,7 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
+      </FavoritesContextProvider>
     </>
   )
 }
