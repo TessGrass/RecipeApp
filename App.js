@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import { StatusBar, StyleSheet } from 'react-native'
+import { StatusBar } from 'react-native'
 import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
 import CategoriesScreen from './screens/CategoriesScreen'
@@ -8,12 +8,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import MealsOverViewScreen from './screens/MealsOverviewScreen'
 import MealsDetailsScreen from './screens/MealsDetailsScreen'
-import FavoriteScreen from './screens/FavoriteScreen';
+import FavoriteScreen from './screens/FavoriteScreen'
+import { Ionicons } from '@expo/vector-icons'
 
-const Stack = createNativeStackNavigator() 
 // Stack is an object with two properties where every properties holds an object that acts like a component.
 // Stack.Screen allows us to register a screen that will be manage by the Stack.Navigator.
-const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator() 
+const Drawer = createDrawerNavigator(); //Sliding navigator
 
 function DrawerNavigator() {
   return <Drawer.Navigator
@@ -22,10 +23,31 @@ function DrawerNavigator() {
       headerTintColor: 'white',
       headerTitleAlign: 'center',
       title: "All Categories",
-      sceneContainerStyle: {backgroundColor: '#3f2f25'}, // To set background color when using drawer, sceneContainerStyle must be used.
+      sceneContainerStyle: { backgroundColor: '#3f2f25'}, // To set background color when using drawer, sceneContainerStyle must be used.
+      drawerContentStyle: { backgroundColor:'#351401' },
+      drawerInactiveTintColor: 'white',
+      drawerActiveTintColor: '#351401',
+      drawerActiveBackgroundColor: '#9c7d69'
     }}>
-    <Drawer.Screen name="Categories" component={CategoriesScreen} />
-    <Drawer.Screen name="Favorites" component={FavoriteScreen} />
+    <Drawer.Screen 
+      name="Categories"
+      component={CategoriesScreen}
+      options={{
+        title: 'All Categories',
+        drawerIcon: ({color, size}) => (
+        <Ionicons name="list" color={color} size={size} />
+        ),
+      }}
+    />
+    <Drawer.Screen name="Favorites" component={FavoriteScreen}
+      options={{
+      title: 'Favorites',
+      drawerIcon: ({color, size}) => (
+      <Ionicons name="star" color={color} size={size} />
+      ),
+    }}
+    
+    />
   </Drawer.Navigator>
 }
 
@@ -74,9 +96,3 @@ export default function App() {
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-
-  },
-})
